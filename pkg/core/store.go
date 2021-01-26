@@ -1,4 +1,4 @@
-package raft
+package core
 
 // Key represents the identification key for a value inside the state machine.
 type Key string

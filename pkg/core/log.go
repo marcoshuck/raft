@@ -1,4 +1,4 @@
-package raft
+package core
 
 // Entry represents a data structure saved in the RAFT log.
 // Entry is used to perform an operation to the store.
