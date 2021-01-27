@@ -1,11 +1,18 @@
 package core
 
-import "testing"
+import (
+	"github.com/matryer/is"
+	"testing"
+)
 
 func TestProcessLog(t *testing.T) {
+	is := is.New(t)
+
+	// Initialize an empty store
 	s := make(Store, 0)
 
-	log := Log{
+	// Process the logs
+	err := s.Process(Log{
 		Entry{
 			Key:   "a",
 			Value: 1,
@@ -18,29 +25,36 @@ func TestProcessLog(t *testing.T) {
 			Key:   "c",
 			Value: 3,
 		},
-	}
+	})
+	is.NoErr(err)
 
-	err := s.Process(log)
-	if err != nil {
-		t.Fail()
-	}
+	// Make sure it has the right length
+	is.Equal(len(s), 3)
 
-	if len(s) != 3 {
-		t.Fail()
-	}
-
+	// Check each entry has the right value
 	v, ok := s["a"]
-	if !ok || v != 1 {
-		t.Fail()
-	}
+	is.Equal(v, Value(1))
+	is.Equal(ok, true)
 
 	v, ok = s["b"]
-	if !ok || v != 2 {
-		t.Fail()
-	}
+	is.Equal(v, Value(2))
+	is.Equal(ok, true)
 
 	v, ok = s["c"]
-	if !ok || v != 3 {
-		t.Fail()
-	}
+	is.Equal(v, Value(3))
+	is.Equal(ok, true)
+
+	// Run Process again
+	err = s.Process(Log{
+		Entry{
+			Key:   "a",
+			Value: 999,
+		},
+	})
+	is.NoErr(err)
+
+	// Check a's value again
+	v, ok = s["a"]
+	is.Equal(v, Value(999))
+	is.Equal(ok, true)
 }
