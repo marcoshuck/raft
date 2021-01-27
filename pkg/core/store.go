@@ -8,3 +8,11 @@ type Value float64
 
 // Store represents a map of Key and Value. It's used to represent the state machine.
 type Store map[Key]Value
+
+// Process changes the underlying map data from changes requested in the log.
+func (s Store) Process(log Log) error {
+	for _, m := range log {
+		s[m.Key] = m.Value
+	}
+	return nil
+}
