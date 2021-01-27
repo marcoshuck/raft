@@ -34,15 +34,15 @@ func TestProcessLog(t *testing.T) {
 	// Check each entry has the right value
 	v, ok := s["a"]
 	is.Equal(v, Value(1))
-	is.Equal(ok, true)
+	is.True(ok)
 
 	v, ok = s["b"]
 	is.Equal(v, Value(2))
-	is.Equal(ok, true)
+	is.True(ok)
 
 	v, ok = s["c"]
 	is.Equal(v, Value(3))
-	is.Equal(ok, true)
+	is.True(ok)
 
 	// Run Process again
 	err = s.Process(Log{
@@ -56,5 +56,5 @@ func TestProcessLog(t *testing.T) {
 	// Check a's value again
 	v, ok = s["a"]
 	is.Equal(v, Value(999))
-	is.Equal(ok, true)
+	is.True(ok)
 }
