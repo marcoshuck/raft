@@ -10,4 +10,6 @@ var (
 	StatusFollower Status = "follower"
 	// StatusCandidate is used to mark a server as candidate for the next election.
 	StatusCandidate Status = "candidate"
+	// StatusUnknown is used to represent when a server has an incorrect status.
+	StatusUnknown Status = "unknown"
 )

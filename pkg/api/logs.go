@@ -2,8 +2,8 @@ package api
 
 import "github.com/marcoshuck/raft/pkg/core"
 
-// LogProcessor has a method to process a log.
-type LogProcessor interface {
-	// Process receives a log and performs operations over core.Store's state.
-	Process(log core.Log) error
+// LogAppender has a method to append log entries.
+type LogAppender interface {
+	// Append receives a set of entries (log) and appends these changes over core.Store's state.
+	Append(log core.Log, lastApplied, commitIndex int64) error
 }

@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package api;
+
+option go_package = ".;pb";
+
+service EntriesAppender {
+  rpc Append (AppendRequest) returns (AppendResponse) {}
+}
+
+message AppendRequest {
+  int64 term = 1;
+  int64 leader = 2;
+  int64 lastLogIndex = 3;
+  int64 lastLogTerm = 4;
+  repeated Entry entries = 5;
+  int64 leaderCommitIndex = 6;
+}
+
+message AppendResponse {
+  int64 term = 1;
+  bool success = 2;
+}
+
+message Entry {
+  string Key = 1;
+  float Value = 2;
+}

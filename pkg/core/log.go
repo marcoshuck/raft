@@ -3,8 +3,8 @@ package core
 // Entry represents a data structure saved in the RAFT log.
 // Entry is used to perform an operation to the store.
 type Entry struct {
-	Key   Key
-	Value Value
+	Key   string
+	Value float64
 }
 
 // Log represents a list of changes performed to the Store.
